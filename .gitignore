@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+*.pyc
+*.csv
+backend/tmp/
+*.zip

@@ -53,7 +53,7 @@ function wireUploadPage() {
         setStatus('Select a CSV to start.');
         return;
     }
-    setStatus('Scoring in progress…');
+    setStatus('Scoring in progress...');
     button.disabled = true;
     button.classList.add('opacity-70');
     try {
@@ -95,8 +95,8 @@ function wireUploadPage() {
     try {
       const summary = JSON.parse(stored);
       quick.querySelector('[data-job]').textContent = summary.job_id || 'latest';
-      quick.querySelector('[data-rows]').textContent = summary.rows ?? '—';
-      quick.querySelector('[data-flagged]').textContent = summary.flagged ?? '—';
+      quick.querySelector('[data-rows]').textContent = summary.rows ?? '-';
+      quick.querySelector('[data-flagged]').textContent = summary.flagged ?? '-';
       quick.classList.remove('hidden');
     } catch (e) {
       // ignore parse errors
@@ -110,12 +110,20 @@ async function fetchJob(jobId) {
   return res.json();
 }
 
+function getDisplayFileName(summary) {
+  if (summary.display_name) return summary.display_name;
+  const rawName = summary.file_name || '';
+  const match = rawName.match(/(\.[a-z0-9]+)$/i);
+  const ext = match ? match[1].toLowerCase() : '.csv';
+  return summary.job_id ? `upload_${summary.job_id}${ext}` : `upload${ext}`;
+}
+
 function renderResults(summary) {
   const set = (id, value) => {
     const el = q(id);
     if (el) el.textContent = value;
   };
-  set('result-file-name', summary.file_name);
+  set('result-file-name', getDisplayFileName(summary));
   set('result-processed-at', new Date(summary.processed_at).toLocaleString());
   set('result-total-rows', summary.rows);
   set('result-high-risk', summary.high_risk);
@@ -129,7 +137,7 @@ function renderResults(summary) {
     download.href = summary.download_url;
   }
 
-  const ignored = new Set(['risk_percent', 'fraud_flag', 'risk_label', 'paysim_prob', 'kartik_prob', 'final_score']);
+  const ignored = new Set(['risk_percent', 'fraud_flag', 'risk_label', 'paysim_prob', 'kartik_prob', 'final_score', 'model_score', 'reason_score']);
   const pickField = (row, preferred, used) => {
     for (const key of preferred) {
       if (row[key] !== undefined && row[key] !== null && row[key] !== '') {
@@ -152,7 +160,7 @@ function renderResults(summary) {
     table.innerHTML = '';
     summary.top_cases.forEach((row, idx) => {
       const used = new Set();
-      const merch = pickField(row, ['merchant', 'category', 'Customer Id', 'customer_id', 'Company', 'company', 'name'], used).value;
+      const merch = pickField(row, ['risk_reasons', 'merchant', 'category', 'Customer Id', 'customer_id', 'Company', 'company', 'name'], used).value;
       const amount = pickField(row, ['amount', 'Amount', 'amt', 'transaction_amount'], used).value;
       const type = pickField(row, ['type', 'Type', 'payment_type', 'txn_type'], used).value;
 
@@ -200,6 +208,8 @@ function wireResultsPage() {
   fetchJob(jobId)
     .then((summary) => {
       renderResults(summary);
+      const msg = q('results-status');
+      if (msg) msg.textContent = `Loaded results for job ${jobId}.`;
       localStorage.setItem('lastJobId', jobId);
       localStorage.setItem('lastSummary', JSON.stringify(summary));
     })

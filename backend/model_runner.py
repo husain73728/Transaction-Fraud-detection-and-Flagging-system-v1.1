@@ -45,6 +45,14 @@ PAYSIM_FEATURES = [
     "dest_zero",
 ]
 
+PAYSIM_TYPE_MAP = {
+    "CASH_IN": 0,
+    "CASH_OUT": 1,
+    "DEBIT": 2,
+    "PAYMENT": 3,
+    "TRANSFER": 4,
+}
+
 KARTIK_FEATURES = [
     "merchant",
     "category",
@@ -70,6 +78,25 @@ KARTIK_FEATURES = [
     "distance_km",
 ]
 
+KARTIK_RAW_COLUMNS = {
+    "merchant",
+    "category",
+    "amt",
+    "gender",
+    "city",
+    "state",
+    "zip",
+    "lat",
+    "long",
+    "city_pop",
+    "job",
+    "unix_time",
+    "merch_lat",
+    "merch_long",
+    "trans_date_trans_time",
+    "dob",
+}
+
 
 # =========================================================
 # HELPERS
@@ -92,6 +119,132 @@ def ensure_numeric(df: pd.DataFrame, cols: List[str]):
         if col in df.columns:
             df[col] = pd.to_numeric(df[col], errors="coerce")
     return df
+
+
+def safe_display_name(file_name: str, job_id: str) -> str:
+    suffix = Path(file_name).suffix.lower() or ".csv"
+    return f"upload_{job_id}{suffix}"
+
+
+def _normalize_type_label(value: Any) -> str:
+    if pd.isna(value):
+        return ""
+    return str(value).strip().upper()
+
+
+def _safe_ratio(numerator: float, denominator: float) -> float:
+    if pd.isna(numerator) or pd.isna(denominator) or denominator == 0:
+        return 0.0
+    return float(numerator) / float(denominator)
+
+
+def generate_pay_sim_reasons(raw_row: pd.Series, scored_row: pd.Series) -> List[str]:
+    tx_type = _normalize_type_label(raw_row.get("type"))
+    amount = float(raw_row.get("amount", 0) or 0)
+    old_org = float(raw_row.get("oldbalanceOrg", raw_row.get("oldbalanceorg", 0)) or 0)
+    new_org = float(raw_row.get("newbalanceOrig", raw_row.get("newbalanceorig", 0)) or 0)
+    old_dest = float(raw_row.get("oldbalanceDest", raw_row.get("oldbalancedest", 0)) or 0)
+    new_dest = float(raw_row.get("newbalanceDest", raw_row.get("newbalancedest", 0)) or 0)
+    hour = scored_row.get("hour")
+
+    reasons: List[str] = []
+    drain_ratio = 1 - _safe_ratio(new_org, old_org) if old_org > 0 else 0.0
+    sender_drop = old_org - new_org
+    dest_gain = new_dest - old_dest
+    exact_sender_match = abs(sender_drop - amount) <= max(1.0, amount * 0.01)
+    exact_dest_match = abs(dest_gain - amount) <= max(1.0, amount * 0.01)
+
+    if tx_type in {"TRANSFER", "CASH_OUT"}:
+        reasons.append("high-risk transaction type")
+    if amount >= 500000:
+        reasons.append("unusually high transaction amount")
+    elif amount >= 250000:
+        reasons.append("elevated transaction amount")
+    if drain_ratio >= 0.98:
+        reasons.append("account nearly drained")
+    elif drain_ratio >= 0.9:
+        reasons.append("sender balance heavily reduced")
+    if tx_type == "TRANSFER" and old_dest == 0 and new_dest == 0:
+        reasons.append("suspicious destination balance pattern")
+    elif tx_type == "CASH_OUT" and exact_dest_match:
+        reasons.append("destination balance rose almost exactly with the withdrawal")
+    if exact_sender_match and amount >= 250000:
+        reasons.append("sender balance drop matches the transaction amount")
+    if pd.notna(hour) and int(hour) in {23, 0, 1, 2, 3, 4, 5}:
+        reasons.append("night-time transaction")
+
+    # Preserve order but remove duplicates.
+    return list(dict.fromkeys(reasons))
+
+
+def paysim_reason_score(raw_row: pd.Series, reasons: List[str]) -> float:
+    tx_type = _normalize_type_label(raw_row.get("type"))
+    amount = float(raw_row.get("amount", 0) or 0)
+    old_org = float(raw_row.get("oldbalanceOrg", raw_row.get("oldbalanceorg", 0)) or 0)
+    new_org = float(raw_row.get("newbalanceOrig", raw_row.get("newbalanceorig", 0)) or 0)
+    drain_ratio = 1 - _safe_ratio(new_org, old_org) if old_org > 0 else 0.0
+
+    score = 0.0
+    if "high-risk transaction type" in reasons:
+        score += 0.08
+    if "unusually high transaction amount" in reasons:
+        score += 0.22
+    elif "elevated transaction amount" in reasons:
+        score += 0.12
+    if "account nearly drained" in reasons:
+        score += 0.22
+    elif "sender balance heavily reduced" in reasons:
+        score += 0.12
+    if "suspicious destination balance pattern" in reasons:
+        score += 0.28
+    if "destination balance rose almost exactly with the withdrawal" in reasons:
+        score += 0.18
+    if "sender balance drop matches the transaction amount" in reasons:
+        score += 0.12
+    if "night-time transaction" in reasons:
+        score += 0.05
+
+    if tx_type == "TRANSFER" and amount >= 750000 and drain_ratio >= 0.98:
+        score += 0.08
+    if tx_type == "CASH_OUT" and amount >= 750000 and drain_ratio >= 0.98:
+        score += 0.05
+
+    return min(score, 0.95)
+
+
+def assign_risk_label(
+    *,
+    score: float,
+    effective_threshold: float,
+    raw_row: pd.Series,
+    reasons: List[str],
+    reason_score: float,
+    paysim_available: bool,
+    kartik_available: bool,
+) -> str:
+    if pd.isna(score):
+        return "UNKNOWN"
+
+    strong_reasons = len(reasons)
+    tx_type = _normalize_type_label(raw_row.get("type"))
+    amount = float(raw_row.get("amount", 0) or 0)
+
+    if score >= 0.75:
+        return "HIGH RISK"
+    if paysim_available and not kartik_available:
+        if score >= 0.35 and reason_score >= 0.55 and strong_reasons >= 3:
+            return "HIGH RISK"
+        if tx_type == "TRANSFER" and score >= 0.25 and reason_score >= 0.7:
+            return "HIGH RISK"
+        if score >= effective_threshold:
+            return "MEDIUM RISK"
+        if reason_score >= 0.45 and strong_reasons >= 3 and amount >= 500000:
+            return "MEDIUM RISK"
+        return "LOW RISK"
+
+    if score >= max(0.5, effective_threshold):
+        return "MEDIUM RISK"
+    return "LOW RISK"
 
 
 def prepare_paysim(df: pd.DataFrame) -> pd.DataFrame | None:
@@ -127,7 +280,8 @@ def prepare_paysim(df: pd.DataFrame) -> pd.DataFrame | None:
 
     # encode type if it is not already numeric (handles object + pandas string dtypes)
     if not ptypes.is_numeric_dtype(temp["type"]):
-        temp["type"] = temp["type"].astype("category").cat.codes
+        normalized = temp["type"].astype(str).str.strip().str.upper()
+        temp["type"] = normalized.map(PAYSIM_TYPE_MAP).fillna(-1).astype(int)
 
     temp["hour"] = temp["step"] % 24
     temp["is_night"] = ((temp["hour"] >= 23) | (temp["hour"] <= 5)).astype(int)
@@ -144,9 +298,13 @@ def prepare_paysim(df: pd.DataFrame) -> pd.DataFrame | None:
     return temp[PAYSIM_FEATURES].copy()
 
 
-def prepare_kartik(df: pd.DataFrame) -> pd.DataFrame:
+def prepare_kartik(df: pd.DataFrame) -> pd.DataFrame | None:
     temp = df.copy()
     temp.columns = temp.columns.str.strip().str.lower()
+
+    present_cols = KARTIK_RAW_COLUMNS.intersection(temp.columns)
+    if "amt" not in temp.columns or len(present_cols) < 4:
+        return None
 
     # if timestamp exists, derive time features
     if "trans_date_trans_time" in temp.columns:
@@ -228,6 +386,12 @@ def score_dataframe(
     else:
         result["kartik_prob"] = np.nan
 
+    paysim_available = result["paysim_prob"].notna().any()
+    kartik_available = result["kartik_prob"].notna().any()
+    effective_threshold = final_threshold
+    if paysim_available ^ kartik_available:
+        effective_threshold = min(final_threshold, 0.25)
+
     # -------------------------
     # FINAL COMBINED SCORE
     # if one model is unavailable, use the other
@@ -246,20 +410,35 @@ def score_dataframe(
             return np.nan
 
     result["final_score"] = result.apply(combine_scores, axis=1)
+    result["model_score"] = result["final_score"]
+    result["reason_score"] = 0.0
+    result["risk_reasons"] = ""
+
+    pay_sim_like = X_paysim is not None and len(X_paysim) > 0
+    if pay_sim_like:
+        reason_lists: List[List[str]] = []
+        reason_scores: List[float] = []
+        for idx in result.index:
+            reasons = generate_pay_sim_reasons(df.loc[idx], result.loc[idx])
+            reason_lists.append(reasons)
+            reason_scores.append(paysim_reason_score(df.loc[idx], reasons))
+        result["risk_reasons"] = ["; ".join(reasons) for reasons in reason_lists]
+        result["reason_score"] = reason_scores
+
     result["risk_percent"] = result["final_score"] * 100
-    result["fraud_flag"] = (result["final_score"] >= final_threshold).astype("Int64")
-
-    def label_risk(score):
-        if pd.isna(score):
-            return "UNKNOWN"
-        if score >= 0.8:
-            return "HIGH RISK"
-        elif score >= 0.5:
-            return "MEDIUM RISK"
-        else:
-            return "LOW RISK"
-
-    result["risk_label"] = result["final_score"].apply(label_risk)
+    result["risk_label"] = [
+        assign_risk_label(
+            score=result.loc[idx, "final_score"],
+            effective_threshold=effective_threshold,
+            raw_row=df.loc[idx],
+            reasons=[part.strip() for part in str(result.loc[idx, "risk_reasons"]).split(";") if part.strip()],
+            reason_score=float(result.loc[idx, "reason_score"] or 0),
+            paysim_available=bool(pd.notna(result.loc[idx, "paysim_prob"])),
+            kartik_available=bool(pd.notna(result.loc[idx, "kartik_prob"])),
+        )
+        for idx in result.index
+    ]
+    result["fraud_flag"] = result["risk_label"].isin(["MEDIUM RISK", "HIGH RISK"]).astype("Int64")
     return result
 
 
@@ -291,6 +470,7 @@ class RunSummary:
 def _pick_sample_columns(df: pd.DataFrame) -> List[str]:
     'Pick a small set of columns to surface in the UI table.'
     preferred = [
+        "risk_reasons",
         "amount",
         "amt",
         "type",
@@ -341,7 +521,7 @@ def summarize_results(
 
     return RunSummary(
         job_id=job_id,
-        file_name=file_name,
+        file_name=safe_display_name(file_name, job_id),
         processed_at=datetime.utcnow().isoformat() + "Z",
         rows=int(len(scored_df)),
         high_risk=high,
