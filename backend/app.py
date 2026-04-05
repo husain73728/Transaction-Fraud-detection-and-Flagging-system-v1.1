@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from tempfile import gettempdir
 
 from fastapi import FastAPI, File, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
@@ -12,7 +13,7 @@ from .runtime_model_runner import generate_job_id, score_csv_file
 
 BASE_DIR = Path(__file__).resolve().parent
 FRONTEND_DIR = BASE_DIR.parent / "frontend"
-TMP_DIR = BASE_DIR / "tmp"
+TMP_DIR = Path(gettempdir()) / "fraud_v1_1"
 UPLOAD_DIR = TMP_DIR / "uploads"
 PRED_DIR = TMP_DIR / "predictions"
 SUMMARY_DIR = TMP_DIR / "summaries"
