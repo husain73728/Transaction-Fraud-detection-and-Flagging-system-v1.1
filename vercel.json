@@ -1,0 +1,8 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "functions": {
+    "app.py": {
+      "excludeFiles": "{backend/tmp/**,backend/__pycache__/**,fraud/**,stitch/**,analysis_results_dashboard/**,premium_fraud_detection_landing_page/**,upload_csv_dashboard/**,sentinels_onyx/**,*.log,uvicorn.*,run_site.bat,start_server.bat,buildpredict.py,dataclean.py,trainkartik.py,trainpaysim.py,kartik_model.pkl,paysim_model.pkl,input_transactions.csv,nigger.csv}"
+    }
+  }
+}
