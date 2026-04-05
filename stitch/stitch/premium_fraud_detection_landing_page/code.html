@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VIGILANT | AI Fraud Detection</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline": "#8b90a0",
+                    "on-primary-container": "#00285c",
+                    "surface-dim": "#111318",
+                    "inverse-surface": "#e2e2e8",
+                    "surface-container-lowest": "#0c0e12",
+                    "surface-container-high": "#282a2e",
+                    "background": "#111318",
+                    "surface-bright": "#37393e",
+                    "on-primary": "#002e69",
+                    "on-tertiary-fixed-variant": "#930005",
+                    "on-secondary": "#003911",
+                    "on-error": "#690005",
+                    "outline-variant": "#414755",
+                    "primary": "#adc6ff",
+                    "surface-container": "#1e2024",
+                    "secondary-container": "#05b046",
+                    "on-background": "#e2e2e8",
+                    "inverse-on-surface": "#2f3035",
+                    "on-primary-fixed-variant": "#004493",
+                    "on-primary-fixed": "#001a41",
+                    "error-container": "#93000a",
+                    "secondary": "#53e16f",
+                    "tertiary-container": "#ff5545",
+                    "surface-tint": "#adc6ff",
+                    "on-surface": "#e2e2e8",
+                    "on-secondary-fixed": "#002107",
+                    "on-tertiary-container": "#5c0002",
+                    "on-error-container": "#ffdad6",
+                    "on-tertiary-fixed": "#410001",
+                    "secondary-fixed-dim": "#53e16f",
+                    "tertiary-fixed-dim": "#ffb4aa",
+                    "on-secondary-fixed-variant": "#00531c",
+                    "surface": "#111318",
+                    "on-surface-variant": "#c1c6d7",
+                    "tertiary-fixed": "#ffdad5",
+                    "primary-fixed": "#d8e2ff",
+                    "on-tertiary": "#690003",
+                    "inverse-primary": "#005bc1",
+                    "surface-container-highest": "#333539",
+                    "primary-fixed-dim": "#adc6ff",
+                    "secondary-fixed": "#72fe88",
+                    "tertiary": "#ffb4aa",
+                    "surface-container-low": "#1a1c20",
+                    "on-secondary-container": "#003a11",
+                    "primary-container": "#4b8eff",
+                    "error": "#ffb4ab",
+                    "surface-variant": "#333539"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>body {
+    background-color: #111318;
+    color: #e2e2e8;
+    font-family: "Inter", sans-serif;
+    overflow-x: hidden
+    }
+.grain-overlay {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuCKwK5le7ybmyctARasSJzJiKPFeXU_L3LQCtEW-iJS2LoQ9zMimj9b4xUhO-jpNmJkeBAW9StXmMP4VikAoPtpKspaymDaQhO2C8oNYm02hBoG_kCGVhgvGUrjqucdQ_ujKMa5IgHrOzMv43rigjAtIci88ex1ZKSSaUl3K-vGhjVjSdun7ZGzGDRtqy5EJhQaVk7hD3k7RGsyVWMsM6HpgEWEHSEW8SI0n76Y_VvDz2uO_eoZpWdl6Tt8-4akiqRNa_r9nr74k892);
+    opacity: 0.05;
+    pointer-events: none
+    }
+.glass-card {
+    background: rgba(51, 53, 57, 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(226, 226, 232, 0.1)
+    }
+.hero-gradient {
+    background: radial-gradient(circle at 50% 50%, rgba(75, 142, 255, 0.15) 0%, rgba(17, 19, 24, 0) 70%)
+    }
+.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+    vertical-align: middle
+    }
+.text-glow-red {
+    text-shadow: 0 0 20px rgba(255, 85, 69, 0.5)
+    }</style>
+</head>
+<body class="selection:bg-primary/30">
+<div class="fixed inset-0 grain-overlay z-0"></div>
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#111318]/60 backdrop-blur-xl no-border tonal-shift shadow-2xl shadow-blue-900/20">
+<div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+<div class="text-xl font-bold tracking-tighter text-[#ADC6FF] font-manrope">VIGILANT</div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="text-[#E2E2E8]/70 hover:text-[#E2E2E8] transition-colors font-manrope tracking-tight font-semibold" href="#">Intelligence</a>
+<a class="text-[#E2E2E8]/70 hover:text-[#E2E2E8] transition-colors font-manrope tracking-tight font-semibold" href="#">Solutions</a>
+<a class="text-[#E2E2E8]/70 hover:text-[#E2E2E8] transition-colors font-manrope tracking-tight font-semibold" href="#">Network</a>
+<a class="text-[#E2E2E8]/70 hover:text-[#E2E2E8] transition-colors font-manrope tracking-tight font-semibold" href="#">Company</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-[#E2E2E8]/70 hover:text-[#E2E2E8] transition-colors font-manrope tracking-tight font-semibold">Login</button>
+<button class="bg-primary-container text-on-primary font-manrope font-semibold px-6 py-2 rounded-xl hover:bg-[#37393E] hover:shadow-[0_0_15px_rgba(75,142,255,0.3)] transition-all duration-300 ease-out active:scale-95">Get Started</button>
+</div>
+</div>
+</nav>
+<main class="relative z-10 pt-20">
+<!-- Hero Section -->
+<section class="min-h-screen flex flex-col items-center justify-center px-6 relative overflow-hidden">
+<div class="absolute inset-0 hero-gradient -z-10"></div>
+<div class="max-w-5xl w-full text-center space-y-8">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-high border border-outline-variant/20 text-primary text-xs font-semibold tracking-wider uppercase">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                    Next-Gen Fraud Intelligence
+                </div>
+<h1 class="text-5xl md:text-7xl lg:text-8xl font-headline font-extrabold tracking-tighter text-on-surface leading-[0.95]">
+                    Detect Fraud Before<br/>It Costs You.
+                </h1>
+<p class="text-lg md:text-xl text-on-surface-variant max-w-2xl mx-auto font-body font-light leading-relaxed">
+                    AI-powered transaction analysis that uncovers hidden fraud patterns in seconds. Deploy bank-grade security with a single API call.
+                </p>
+<div class="flex flex-col items-center gap-4">
+<button class="group relative px-8 py-4 bg-primary-container text-on-primary font-headline font-bold text-lg rounded-xl transition-all duration-300 hover:scale-105 active:scale-95 shadow-[0_0_30px_rgba(75,142,255,0.4)]">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined">security</span>
+                            Get Started
+                        </span>
+</button>
+<span class="text-on-surface-variant/50 text-sm font-label italic">Free • No credit card required.</span>
+</div>
+</div>
+<!-- Floating Result Card -->
+<div class="mt-20 w-full max-w-lg mx-auto transform perspective-1000 rotate-x-6">
+<div class="glass-card p-8 rounded-full shadow-2xl relative">
+<div class="absolute -top-4 -right-4 w-24 h-24 bg-tertiary-container/20 blur-3xl rounded-full"></div>
+<div class="flex justify-between items-start mb-6">
+<div>
+<p class="text-on-surface-variant/60 text-xs font-label uppercase tracking-widest mb-1">Analysis Report</p>
+<h3 class="text-xl font-headline font-bold">Transaction #8842-X</h3>
+</div>
+<span class="px-3 py-1 bg-tertiary-container/20 text-tertiary text-xs rounded-full border border-tertiary/20">Action Required</span>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between items-center py-4 border-b border-outline-variant/10">
+<span class="text-on-surface-variant">Fraud Risk</span>
+<span class="text-3xl font-headline font-extrabold text-tertiary text-glow-red">92% (High)</span>
+</div>
+<div class="flex justify-between items-center py-2">
+<span class="text-on-surface-variant text-sm">Pattern Match</span>
+<span class="text-on-surface font-semibold text-sm">Anomalous Geo-velocity</span>
+</div>
+<div class="flex justify-between items-center py-2">
+<span class="text-on-surface-variant text-sm">Source</span>
+<span class="text-on-surface font-semibold text-sm">Unverified Terminal ID</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Value Propositions -->
+<section class="py-32 px-8 max-w-7xl mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="glass-card p-8 rounded-xl hover:bg-surface-container-highest transition-colors group">
+<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-6 text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">bolt</span>
+</div>
+<h4 class="text-lg font-headline font-bold mb-3">Instant Fraud Detection</h4>
+<p class="text-on-surface-variant/70 text-sm leading-relaxed">Latency-free analysis for every transaction across your global network.</p>
+</div>
+<div class="glass-card p-8 rounded-xl hover:bg-surface-container-highest transition-colors group">
+<div class="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center mb-6 text-secondary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">psychology</span>
+</div>
+<h4 class="text-lg font-headline font-bold mb-3">AI-Powered Insights</h4>
+<p class="text-on-surface-variant/70 text-sm leading-relaxed">Neural networks trained on trillions of points to spot even the subtle patterns.</p>
+</div>
+<div class="glass-card p-8 rounded-xl hover:bg-surface-container-highest transition-colors group">
+<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-6 text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">shield</span>
+</div>
+<h4 class="text-lg font-headline font-bold mb-3">Secure &amp; Private</h4>
+<p class="text-on-surface-variant/70 text-sm leading-relaxed">Zero-knowledge proof architecture ensures your user data never leaves your VPC.</p>
+</div>
+<div class="glass-card p-8 rounded-xl hover:bg-surface-container-highest transition-colors group">
+<div class="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center mb-6 text-secondary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">query_stats</span>
+</div>
+<h4 class="text-lg font-headline font-bold mb-3">Real-Time Results</h4>
+<p class="text-on-surface-variant/70 text-sm leading-relaxed">Live dashboard updates and automated webhooks for instant remediation.</p>
+</div>
+</div>
+</section>
+<!-- Demo Preview Section -->
+<section class="py-32 px-8 bg-surface-container-low/30">
+<div class="max-w-7xl mx-auto">
+<div class="flex flex-col md:flex-row gap-16 items-center">
+<div class="w-full md:w-1/2 space-y-6 text-left">
+<h2 class="text-4xl md:text-5xl font-headline font-bold tracking-tight">The interface of <span class="text-primary">unseen defense.</span></h2>
+<p class="text-on-surface-variant text-lg leading-relaxed">Everything you need to monitor, detect, and respond to threats in real-time. Our minimal dashboard focuses only on what matters: the risk.</p>
+<ul class="space-y-4">
+<li class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-secondary">check_circle</span>
+                                Visual risk scoring system
+                            </li>
+<li class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-secondary">check_circle</span>
+                                Exportable CSV forensic reports
+                            </li>
+<li class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-secondary">check_circle</span>
+                                Advanced metadata drill-down
+                            </li>
+</ul>
+</div>
+<div class="w-full md:w-1/2">
+<div class="glass-card rounded-xl overflow-hidden shadow-2xl border border-outline-variant/10">
+<div class="bg-surface-container-high px-6 py-4 flex items-center gap-2 border-b border-outline-variant/10">
+<div class="flex gap-1.5">
+<div class="w-2.5 h-2.5 rounded-full bg-error/40"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-secondary/40"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-primary/40"></div>
+</div>
+<div class="mx-auto text-xs font-label text-on-surface-variant/60">VIGILANT_SECURE_ANALYSIS_V4</div>
+</div>
+<div class="p-6 space-y-6">
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container p-4 rounded-xl">
+<div class="text-xs text-on-surface-variant/50 uppercase tracking-widest mb-1">Risk Score</div>
+<div class="text-3xl font-headline font-extrabold text-primary">0.04</div>
+<div class="text-[10px] text-secondary mt-1">SAFE TRANSATION</div>
+</div>
+<div class="bg-surface-container p-4 rounded-xl">
+<div class="text-xs text-on-surface-variant/50 uppercase tracking-widest mb-1">Fraud Label</div>
+<div class="text-3xl font-headline font-extrabold text-on-surface">NO</div>
+<div class="text-[10px] text-on-surface-variant/50 mt-1">99.9% CONFIDENCE</div>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-xs text-left">
+<thead class="text-on-surface-variant/40 uppercase">
+<tr>
+<th class="pb-3 pr-4">ID</th>
+<th class="pb-3 pr-4">Amount</th>
+<th class="pb-3">Status</th>
+</tr>
+</thead>
+<tbody class="text-on-surface-variant/80">
+<tr class="border-t border-outline-variant/5">
+<td class="py-3">TX_4021</td>
+<td class="py-3">$1,240.00</td>
+<td class="py-3 text-secondary">Verified</td>
+</tr>
+<tr class="border-t border-outline-variant/5">
+<td class="py-3">TX_4022</td>
+<td class="py-3">$14.50</td>
+<td class="py-3 text-secondary">Verified</td>
+</tr>
+<tr class="border-t border-outline-variant/5 bg-tertiary/5">
+<td class="py-3">TX_4023</td>
+<td class="py-3">$8,500.00</td>
+<td class="py-3 text-tertiary font-bold">Blocked</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Trust Section -->
+<section class="py-24 px-8">
+<div class="max-w-4xl mx-auto flex flex-wrap justify-center gap-6">
+<div class="flex items-center gap-3 px-6 py-3 rounded-full border border-primary/20 bg-primary/5 shadow-[0_0_20px_rgba(173,198,255,0.1)]">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">security</span>
+<span class="font-headline font-semibold text-sm">Bank-grade Security</span>
+</div>
+<div class="flex items-center gap-3 px-6 py-3 rounded-full border border-secondary/20 bg-secondary/5 shadow-[0_0_20px_rgba(83,225,111,0.1)]">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">cloud_off</span>
+<span class="font-headline font-semibold text-sm">No Data Stored</span>
+</div>
+<div class="flex items-center gap-3 px-6 py-3 rounded-full border border-primary/20 bg-primary/5 shadow-[0_0_20px_rgba(173,198,255,0.1)]">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">speed</span>
+<span class="font-headline font-semibold text-sm">Fast &amp; Reliable</span>
+</div>
+</div>
+</section>
+<!-- Final CTA Section -->
+<section class="py-32 px-8 relative">
+<div class="max-w-4xl mx-auto text-center space-y-10 relative z-10">
+<h2 class="text-5xl md:text-6xl font-headline font-extrabold tracking-tight">Start Detecting Fraud<br/>in Seconds</h2>
+<div class="flex flex-col items-center gap-6">
+<button class="group px-10 py-5 bg-[#007AFF] text-white font-headline font-bold text-xl rounded-full transition-all duration-300 hover:scale-105 active:scale-95 shadow-[0_0_40px_rgba(0,122,255,0.5)] flex items-center gap-4">
+<svg class="w-6 h-6" viewbox="0 0 24 24">
+<path d="M21.35 11.1h-9.17v2.73h5.14c-.22 1.2-.88 2.21-1.9 2.88l3.07 2.38c1.8-1.66 2.84-4.11 2.84-7.01 0-.58-.06-1.14-.17-1.66zM12.18 21c2.43 0 4.47-.8 5.96-2.18l-3.07-2.38c-.85.57-1.94.9-2.89.9-2.23 0-4.12-1.51-4.8-3.53l-3.18 2.46C5.69 19.34 8.7 21 12.18 21zM7.38 13.81c-.17-.5-.27-1.04-.27-1.61s.1-1.11.27-1.61l-3.18-2.46c-.57 1.14-.9 2.43-.9 3.8s.33 2.66.9 3.8l3.18-2.46zM12.18 6.69c1.32 0 2.51.45 3.44 1.35l2.58-2.58C16.65 4.03 14.61 3 12.18 3 8.7 3 5.69 4.66 4.21 7.13l3.18 2.46c.68-2.02 2.57-3.53 4.79-3.53z" fill="currentColor"></path>
+</svg>
+                        Get Started with Google
+                    </button>
+<p class="text-on-surface-variant/60 font-body">Join 5,000+ businesses securing their future.</p>
+</div>
+</div>
+<!-- Decorative Background Element -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-secondary/10 blur-[120px] rounded-full -z-10"></div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#111318] border-t border-[#414755]/10 w-full z-10">
+<div class="flex flex-col md:flex-row justify-between items-center px-8 py-12 max-w-7xl mx-auto gap-6">
+<div class="flex flex-col items-center md:items-start gap-2">
+<span class="text-lg font-bold text-[#ADC6FF] font-manrope">VIGILANT AI</span>
+<p class="font-inter text-sm text-[#E2E2E8]/50">© 2024 Vigilant AI. Secure Intelligence.</p>
+</div>
+<div class="flex gap-8">
+<a class="text-[#E2E2E8]/40 hover:text-[#ADC6FF] transition-colors font-inter text-sm" href="#">Privacy Policy</a>
+<a class="text-[#E2E2E8]/40 hover:text-[#ADC6FF] transition-colors font-inter text-sm" href="#">Terms of Service</a>
+<a class="text-[#E2E2E8]/40 hover:text-[#ADC6FF] transition-colors font-inter text-sm" href="#">Security Disclosure</a>
+<a class="text-[#E2E2E8]/40 hover:text-[#ADC6FF] transition-colors font-inter text-sm" href="#">Status</a>
+</div>
+<div class="text-[#E2E2E8]/40 font-inter text-sm italic">
+                Built for Hackathon 2026
+            </div>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Analysis Results - Vigilant Lens</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface": "#e2e2e8",
+                    "surface-variant": "#333539",
+                    "outline": "#8b90a0",
+                    "surface": "#111318",
+                    "on-tertiary-container": "#5c0002",
+                    "on-tertiary-fixed": "#410001",
+                    "on-error-container": "#ffdad6",
+                    "tertiary": "#ffb4aa",
+                    "secondary": "#53e16f",
+                    "primary-fixed-dim": "#adc6ff",
+                    "on-primary-container": "#00285c",
+                    "inverse-primary": "#005bc1",
+                    "tertiary-fixed": "#ffdad5",
+                    "primary": "#adc6ff",
+                    "outline-variant": "#414755",
+                    "surface-container-highest": "#333539",
+                    "inverse-surface": "#e2e2e8",
+                    "background": "#111318",
+                    "error": "#ffb4ab",
+                    "secondary-container": "#05b046",
+                    "on-tertiary": "#690003",
+                    "surface-bright": "#37393e",
+                    "primary-container": "#4b8eff",
+                    "tertiary-fixed-dim": "#ffb4aa",
+                    "surface-container-high": "#282a2e",
+                    "tertiary-container": "#ff5545",
+                    "surface-tint": "#adc6ff",
+                    "on-primary": "#002e69",
+                    "on-background": "#e2e2e8",
+                    "surface-dim": "#111318",
+                    "surface-container-low": "#1a1c20",
+                    "secondary-fixed-dim": "#53e16f",
+                    "on-tertiary-fixed-variant": "#930005",
+                    "on-primary-fixed-variant": "#004493",
+                    "on-secondary-fixed": "#002107",
+                    "on-secondary-fixed-variant": "#00531c",
+                    "primary-fixed": "#d8e2ff",
+                    "secondary-fixed": "#72fe88",
+                    "on-secondary": "#003911",
+                    "inverse-on-surface": "#2f3035",
+                    "on-surface-variant": "#c1c6d7",
+                    "on-primary-fixed": "#001a41",
+                    "surface-container-lowest": "#0c0e12",
+                    "surface-container": "#1e2024",
+                    "on-secondary-container": "#003a11",
+                    "on-error": "#690005",
+                    "error-container": "#93000a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .headline { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-card {
+            background: rgba(51, 53, 57, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 226, 232, 0.1);
+        }
+        .grain-overlay {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen overflow-x-hidden selection:bg-primary-container selection:text-on-primary">
+<div class="fixed inset-0 grain-overlay z-50"></div>
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-[#111318] dark:bg-slate-950 flex flex-col h-full py-6 px-4 z-50">
+<div class="mb-10 px-2">
+<span class="text-xl font-bold tracking-tighter text-[#ADC6FF] dark:text-blue-300">Vigilant Lens</span>
+<p class="text-[10px] text-slate-500 uppercase tracking-widest mt-1">AI Fraud Intelligence</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-500 hover:text-slate-300 transition-colors hover:bg-[#1E2024] group" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#ADC6FF] bg-[#1E2024] font-semibold border-r-2 border-[#4B8EFF] transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="security" style="font-variation-settings: 'FILL' 1;">security</span>
+<span class="text-sm">Investigations</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-500 hover:text-slate-300 transition-colors hover:bg-[#1E2024] group" href="#">
+<span class="material-symbols-outlined" data-icon="biotech">biotech</span>
+<span class="text-sm font-medium">Fraud Radar</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-500 hover:text-slate-300 transition-colors hover:bg-[#1E2024] group" href="#">
+<span class="material-symbols-outlined" data-icon="upload_file">upload_file</span>
+<span class="text-sm font-medium">Data Sources</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-500 hover:text-slate-300 transition-colors hover:bg-[#1E2024] group" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 space-y-1 border-t border-white/5">
+<button class="w-full bg-primary-container text-on-primary py-2.5 rounded-lg font-bold text-sm mb-6 flex items-center justify-center gap-2 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+                New Analysis
+            </button>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-500 hover:text-slate-300 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+<span class="text-sm">Help Center</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-500 hover:text-slate-300 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="text-sm">Log Out</span>
+</a>
+</div>
+</aside>
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 w-[calc(100%-16rem)] h-16 z-40 bg-[#111318]/80 backdrop-blur-xl border-b border-white/5 flex items-center justify-between px-8">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm" data-icon="search">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-full py-1.5 pl-10 pr-4 text-sm focus:ring-1 focus:ring-primary placeholder:text-slate-600" placeholder="Search investigations..." type="text"/>
+</div>
+<span class="text-xs font-medium text-slate-500 bg-white/5 px-2 py-1 rounded">v2.4</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4 text-slate-400">
+<button class="hover:text-white transition-colors opacity-80 active:opacity-100">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="hover:text-white transition-colors opacity-80 active:opacity-100">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+</button>
+<button class="hover:text-white transition-colors opacity-80 active:opacity-100">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+</button>
+</div>
+<button class="bg-surface-container-highest text-primary text-xs font-bold px-4 py-2 rounded-lg hover:bg-surface-bright transition-colors border border-outline-variant/20">
+                Upload CSV
+            </button>
+<div class="h-8 w-8 rounded-full bg-primary-container overflow-hidden ring-2 ring-white/10">
+<img alt="User Avatar" class="h-full w-full object-cover" data-alt="professional portrait of a security analyst in a dark studio setting with cool cinematic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAANkm5G9_NZsXlj7eH8R5Pxmd_ndWvKJCVWD7o51gqBNeXqTWc2xsFxEsXtJr4LGvFtxcXARCoFXjh6Gx6BzKpEPUNZRM2EMYPtnpqDuN72czNchUCVlPcXH47qCycY3DO2ucJhGWYJ2qyB1alY7LzeYNuDShF68jFmGlqlAaPdKAQfd8-LHMXhxgMH_e9bNh9LcSR9BDZILdbiDYcr38tpkd8BBC-RBVLiyKFx5DFR__f33D4380PCyzinIWhQNnZdJw9A3x3RBPP"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-64 pt-24 pb-12 px-8 min-h-screen">
+<!-- Header -->
+<header class="mb-10 flex justify-between items-end">
+<div>
+<h1 class="text-4xl font-extrabold tracking-tight mb-2 text-on-surface">Analysis Results</h1>
+<div class="flex items-center gap-3 text-slate-400 text-sm font-medium">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-base" data-icon="description">description</span>
+                        q3_global_trans.csv
+                    </span>
+<span class="w-1 h-1 bg-slate-700 rounded-full"></span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-base" data-icon="schedule">schedule</span>
+                        Processed: Oct 24, 2023 · 14:32:05
+                    </span>
+</div>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-4 py-2 glass-card rounded-lg text-sm font-semibold hover:bg-surface-bright transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="ios_share">ios_share</span>
+                    Export Report
+                </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-primary-container text-on-primary rounded-lg text-sm font-bold hover:brightness-110 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="refresh">refresh</span>
+                    Re-run AI
+                </button>
+</div>
+</header>
+<!-- Top Row: KPIs -->
+<div class="grid grid-cols-12 gap-6 mb-8">
+<!-- Risk Score Gauge -->
+<div class="col-span-12 lg:col-span-4 glass-card p-6 rounded-xl relative overflow-hidden flex flex-col items-center justify-center text-center group">
+<div class="absolute inset-0 bg-gradient-to-tr from-tertiary-container/10 to-transparent pointer-events-none"></div>
+<div class="relative mb-4">
+<svg class="w-40 h-40 transform -rotate-90">
+<circle class="text-surface-container-highest" cx="80" cy="80" fill="transparent" r="70" stroke="currentColor" stroke-width="8"></circle>
+<circle class="text-tertiary-container drop-shadow-[0_0_8px_rgba(255,85,69,0.5)]" cx="80" cy="80" fill="transparent" r="70" stroke="currentColor" stroke-dasharray="440" stroke-dashoffset="70" stroke-width="10"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-4xl font-extrabold text-on-surface">0.84</span>
+<span class="text-[10px] font-bold text-tertiary uppercase tracking-widest">High Risk</span>
+</div>
+</div>
+<h3 class="text-lg font-bold mb-1">Risk Score Index</h3>
+<p class="text-xs text-slate-400 max-w-[200px]">System identified critical anomalies in cross-border velocity.</p>
+</div>
+<!-- Stats Cards -->
+<div class="col-span-12 lg:col-span-8 grid grid-cols-3 gap-6">
+<div class="glass-card p-6 rounded-xl flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="material-symbols-outlined text-primary p-2 bg-primary/10 rounded-lg" data-icon="account_balance">account_balance</span>
+<span class="text-xs font-bold text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]" data-icon="trending_up">trending_up</span>
+                                +12%
+                            </span>
+</div>
+<p class="text-xs font-medium text-slate-500 uppercase tracking-wider mb-1">Total Transactions</p>
+<h4 class="text-3xl font-extrabold text-on-surface">1.2M</h4>
+</div>
+<div class="mt-4 h-1 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary w-3/4"></div>
+</div>
+</div>
+<div class="glass-card p-6 rounded-xl flex flex-col justify-between border-tertiary/20">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="material-symbols-outlined text-tertiary p-2 bg-tertiary/10 rounded-lg" data-icon="warning">warning</span>
+<span class="text-xs font-bold text-tertiary flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]" data-icon="priority_high">priority_high</span>
+                                High
+                            </span>
+</div>
+<p class="text-xs font-medium text-slate-500 uppercase tracking-wider mb-1">Anomalies Detected</p>
+<h4 class="text-3xl font-extrabold text-on-surface">42</h4>
+</div>
+<div class="mt-4 h-1 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-tertiary-container w-1/4"></div>
+</div>
+</div>
+<div class="glass-card p-6 rounded-xl flex flex-col justify-between border-secondary/20">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="material-symbols-outlined text-secondary p-2 bg-secondary/10 rounded-lg" data-icon="verified_user">verified_user</span>
+<span class="text-xs font-bold text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]" data-icon="check_circle">check_circle</span>
+                                Secured
+                            </span>
+</div>
+<p class="text-xs font-medium text-slate-500 uppercase tracking-wider mb-1">Potential Loss Averted</p>
+<h4 class="text-3xl font-extrabold text-on-surface">$2.4M</h4>
+</div>
+<div class="mt-4 h-1 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-secondary-container w-full"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Middle Row: Visualizations -->
+<div class="grid grid-cols-12 gap-6 mb-8">
+<!-- Fraud Distribution -->
+<div class="col-span-12 lg:col-span-7 glass-card p-6 rounded-xl">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h3 class="text-lg font-bold">Fraud Distribution</h3>
+<p class="text-xs text-slate-500">Alert frequency mapped over a 24hr period</p>
+</div>
+<div class="flex gap-2">
+<button class="text-[10px] px-2 py-1 bg-surface-container-highest rounded text-on-surface font-bold">HOURLY</button>
+<button class="text-[10px] px-2 py-1 hover:bg-surface-container rounded text-slate-500 font-bold transition-colors">DAILY</button>
+</div>
+</div>
+<div class="flex items-end justify-between h-48 gap-2 px-2">
+<!-- Faux Bar Chart -->
+<div class="flex-1 bg-surface-container-highest rounded-t hover:bg-primary-container/40 transition-colors h-[20%] relative group">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-bold opacity-0 group-hover:opacity-100">12</div>
+</div>
+<div class="flex-1 bg-surface-container-highest rounded-t hover:bg-primary-container/40 transition-colors h-[35%]"></div>
+<div class="flex-1 bg-surface-container-highest rounded-t hover:bg-primary-container/40 transition-colors h-[25%]"></div>
+<div class="flex-1 bg-primary-container/60 rounded-t h-[65%] relative">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-bold text-primary">Peak</div>
+</div>
+<div class="flex-1 bg-surface-container-highest rounded-t hover:bg-primary-container/40 transition-colors h-[40%]"></div>
+<div class="flex-1 bg-surface-container-highest rounded-t hover:bg-primary-container/40 transition-colors h-[55%]"></div>
+<div class="flex-1 bg-tertiary-container/60 rounded-t h-[85%] relative">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-bold text-tertiary">Alert</div>
+</div>
+<div class="flex-1 bg-surface-container-highest rounded-t hover:bg-primary-container/40 transition-colors h-[30%]"></div>
+<div class="flex-1 bg-surface-container-highest rounded-t hover:bg-primary-container/40 transition-colors h-[20%]"></div>
+<div class="flex-1 bg-surface-container-highest rounded-t hover:bg-primary-container/40 transition-colors h-[45%]"></div>
+<div class="flex-1 bg-surface-container-highest rounded-t hover:bg-primary-container/40 transition-colors h-[60%]"></div>
+<div class="flex-1 bg-surface-container-highest rounded-t hover:bg-primary-container/40 transition-colors h-[25%]"></div>
+</div>
+<div class="flex justify-between mt-4 text-[10px] text-slate-600 font-bold px-2">
+<span>00:00</span>
+<span>06:00</span>
+<span>12:00</span>
+<span>18:00</span>
+<span>23:59</span>
+</div>
+</div>
+<!-- Risk Factors breakdown -->
+<div class="col-span-12 lg:col-span-5 glass-card p-6 rounded-xl">
+<h3 class="text-lg font-bold mb-6">Risk Factors Breakdown</h3>
+<div class="space-y-6">
+<div>
+<div class="flex justify-between text-xs font-bold mb-2">
+<span class="text-on-surface">Geo-velocity Violations</span>
+<span class="text-primary">45%</span>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary-container w-[45%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs font-bold mb-2">
+<span class="text-on-surface">Pattern Match Failures</span>
+<span class="text-primary-fixed-dim">30%</span>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[30%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs font-bold mb-2">
+<span class="text-on-surface">Card Testing Sequences</span>
+<span class="text-tertiary">25%</span>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-tertiary-container w-[25%]"></div>
+</div>
+</div>
+<div class="pt-4 border-t border-white/5">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-tertiary text-lg" data-icon="info" style="font-variation-settings: 'FILL' 1;">info</span>
+<p class="text-[11px] text-slate-400 leading-relaxed italic">
+                                AI Insights: "Unusual concentration of high-velocity attempts originating from VPN exit nodes in Eastern Europe detected within 120ms intervals."
+                            </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Section: Data Table -->
+<div class="glass-card rounded-xl overflow-hidden">
+<!-- Table Controls -->
+<div class="px-6 py-5 flex items-center justify-between border-b border-white/5">
+<div class="flex items-center gap-6">
+<h3 class="font-bold text-on-surface">Anomalous Transactions</h3>
+<div class="flex items-center gap-2">
+<button class="flex items-center gap-1.5 px-3 py-1 bg-surface-container-highest rounded-full text-xs font-medium text-slate-300 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="filter_list">filter_list</span>
+                            Filter
+                        </button>
+<button class="flex items-center gap-1.5 px-3 py-1 bg-surface-container-highest rounded-full text-xs font-medium text-slate-300 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="sort">sort</span>
+                            Sort
+                        </button>
+</div>
+</div>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm" data-icon="search">search</span>
+<input class="bg-surface-container-low border-none rounded-lg py-1.5 pl-10 pr-4 text-xs focus:ring-1 focus:ring-primary placeholder:text-slate-600 w-64" placeholder="Search ID or amount..." type="text"/>
+</div>
+</div>
+<!-- Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="text-xs font-bold text-slate-500 uppercase tracking-widest bg-surface-container-lowest/50">
+<th class="px-6 py-4">Transaction ID</th>
+<th class="px-6 py-4">Timestamp</th>
+<th class="px-6 py-4">Amount</th>
+<th class="px-6 py-4">Risk Score</th>
+<th class="px-6 py-4">Status</th>
+<th class="px-6 py-4 text-right">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-white/5">
+<tr class="hover:bg-white/5 transition-colors group">
+<td class="px-6 py-4 font-mono text-xs text-primary">TX-9921-042</td>
+<td class="px-6 py-4 text-xs text-slate-400">Oct 24, 14:28:11</td>
+<td class="px-6 py-4 font-bold">$12,450.00</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="h-1.5 w-16 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-tertiary-container w-[92%]"></div>
+</div>
+<span class="text-[10px] font-bold text-tertiary">0.92</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-error-container text-on-error-container">Blocked</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-1 hover:bg-white/10 rounded transition-colors text-slate-500 group-hover:text-white">
+<span class="material-symbols-outlined text-lg" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors group">
+<td class="px-6 py-4 font-mono text-xs text-primary">TX-9921-038</td>
+<td class="px-6 py-4 text-xs text-slate-400">Oct 24, 14:26:45</td>
+<td class="px-6 py-4 font-bold">$1,200.00</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="h-1.5 w-16 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-orange-500 w-[65%]"></div>
+</div>
+<span class="text-[10px] font-bold text-orange-400">0.65</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-orange-900/30 text-orange-400">Flagged</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-1 hover:bg-white/10 rounded transition-colors text-slate-500 group-hover:text-white">
+<span class="material-symbols-outlined text-lg" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors group">
+<td class="px-6 py-4 font-mono text-xs text-primary">TX-9921-035</td>
+<td class="px-6 py-4 text-xs text-slate-400">Oct 24, 14:22:01</td>
+<td class="px-6 py-4 font-bold">$842.15</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="h-1.5 w-16 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[12%]"></div>
+</div>
+<span class="text-[10px] font-bold text-secondary">0.12</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-secondary-container text-on-secondary-container">Verified</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-1 hover:bg-white/10 rounded transition-colors text-slate-500 group-hover:text-white">
+<span class="material-symbols-outlined text-lg" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors group">
+<td class="px-6 py-4 font-mono text-xs text-primary">TX-9921-029</td>
+<td class="px-6 py-4 text-xs text-slate-400">Oct 24, 14:15:33</td>
+<td class="px-6 py-4 font-bold">$22,000.00</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="h-1.5 w-16 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-tertiary-container w-[88%]"></div>
+</div>
+<span class="text-[10px] font-bold text-tertiary">0.88</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-error-container text-on-error-container">Blocked</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-1 hover:bg-white/10 rounded transition-colors text-slate-500 group-hover:text-white">
+<span class="material-symbols-outlined text-lg" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Footer Pagination -->
+<div class="px-6 py-4 flex items-center justify-between border-t border-white/5">
+<span class="text-xs text-slate-500">Showing 1 to 4 of 42 anomalies</span>
+<div class="flex gap-1">
+<button class="p-1.5 rounded-lg border border-white/5 text-slate-500 hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-lg border border-primary/20">1</button>
+<button class="px-3 py-1 text-slate-500 text-xs font-medium rounded-lg hover:bg-white/5">2</button>
+<button class="px-3 py-1 text-slate-500 text-xs font-medium rounded-lg hover:bg-white/5">3</button>
+<button class="p-1.5 rounded-lg border border-white/5 text-slate-500 hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Results | Vigilant Lens</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            background: '#111318',
+            primary: '#adc6ff',
+            'primary-container': '#4b8eff',
+            surface: '#111318',
+            'surface-container': '#1e2024',
+            'surface-container-high': '#282a2e',
+            'surface-container-highest': '#333539',
+            outline: '#8b90a0',
+            'on-surface': '#e2e2e8',
+            'on-surface-variant': '#c1c6d7',
+            secondary: '#53e16f',
+            tertiary: '#ffb4aa',
+          },
+          fontFamily: {
+            headline: ['Manrope'],
+            body: ['Inter'],
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    body { background-color: #111318; color: #e2e2e8; font-family: 'Inter', sans-serif; }
+    .glass { background: rgba(51,53,57,.6); backdrop-filter: blur(14px); border: 1px solid rgba(226,226,232,.1); }
+    .grain-overlay { background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E'); opacity:.04; pointer-events:none; }
+  </style>
+</head>
+<body class="selection:bg-primary/30" id="results-page">
+  <div class="fixed inset-0 grain-overlay z-0"></div>
+  <nav class="fixed top-0 w-full z-40 bg-[#111318]/70 backdrop-blur-xl border-b border-white/5">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="text-2xl font-extrabold tracking-tight text-primary">Vigilant Lens</div>
+        <span class="text-xs text-outline uppercase tracking-widest">AI Fraud Intelligence</span>
+      </div>
+      <div class="hidden md:flex items-center gap-6 text-sm font-semibold">
+        <a class="text-on-surface-variant hover:text-on-surface transition" href="/">Home</a>
+        <a class="text-on-surface-variant hover:text-on-surface transition" href="/upload">Upload</a>
+        <a class="text-primary" href="/results">Results</a>
+      </div>
+      <a class="px-4 py-2 rounded-lg bg-primary-container text-[#00285c] font-bold shadow-[0_8px_30px_rgba(75,142,255,0.25)]" href="/upload">Upload another file</a>
+    </div>
+  </nav>
+
+  <main class="pt-24 pb-16 px-6 relative z-10 max-w-6xl mx-auto">
+    <header class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
+      <div>
+        <p class="text-xs text-outline uppercase tracking-[0.3em]">Analysis results</p>
+        <h1 class="text-3xl font-extrabold">Latest run</h1>
+        <p class="text-sm text-on-surface-variant" id="results-status">Fetching summary…</p>
+      </div>
+      <div class="flex gap-3">
+        <a id="download-link" href="#" class="px-4 py-2 rounded-lg border border-outline/40 text-on-surface font-semibold hover:border-primary/70 transition">Download CSV</a>
+        <a href="/upload" class="px-4 py-2 rounded-lg bg-primary-container text-[#00285c] font-bold">New upload</a>
+      </div>
+    </header>
+
+    <section class="glass rounded-2xl p-6 border border-primary/15 mb-6">
+      <div class="grid md:grid-cols-2 gap-4 text-sm text-on-surface-variant">
+        <p><span class="text-outline">File:</span> <span class="text-on-surface font-semibold" id="result-file-name">—</span></p>
+        <p><span class="text-outline">Processed:</span> <span class="text-on-surface" id="result-processed-at">—</span></p>
+      </div>
+    </section>
+
+    <section class="grid md:grid-cols-3 gap-4 mb-8">
+      <div class="glass rounded-2xl p-5 border border-white/10">
+        <p class="text-sm text-outline">Rows</p>
+        <p class="text-3xl font-extrabold" id="result-total-rows">—</p>
+      </div>
+      <div class="glass rounded-2xl p-5 border border-white/10">
+        <p class="text-sm text-outline">Flagged</p>
+        <p class="text-3xl font-extrabold text-amber-200" id="result-flagged">—</p>
+      </div>
+      <div class="glass rounded-2xl p-5 border border-white/10">
+        <p class="text-sm text-outline">Max risk</p>
+        <p class="text-3xl font-extrabold text-rose-400" id="result-max-risk">—</p>
+      </div>
+    </section>
+
+    <section class="grid md:grid-cols-4 gap-4 mb-10">
+      <div class="glass rounded-2xl p-4 border border-white/10">
+        <p class="text-xs text-outline">High</p>
+        <p class="text-2xl font-bold text-rose-400" id="result-high-risk">—</p>
+      </div>
+      <div class="glass rounded-2xl p-4 border border-white/10">
+        <p class="text-xs text-outline">Medium</p>
+        <p class="text-2xl font-bold text-amber-200" id="result-medium-risk">—</p>
+      </div>
+      <div class="glass rounded-2xl p-4 border border-white/10">
+        <p class="text-xs text-outline">Low</p>
+        <p class="text-2xl font-bold text-emerald-300" id="result-low-risk">—</p>
+      </div>
+      <div class="glass rounded-2xl p-4 border border-white/10">
+        <p class="text-xs text-outline">Average risk</p>
+        <p class="text-2xl font-bold" id="result-avg-risk">—</p>
+      </div>
+    </section>
+
+    <section class="glass rounded-2xl p-6 border border-white/10">
+      <div class="flex items-center justify-between mb-4">
+        <div>
+          <p class="text-xs text-outline uppercase tracking-[0.3em]">Top cases</p>
+          <h2 class="text-xl font-bold">Highest risk rows</h2>
+        </div>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-left">
+          <thead class="text-xs uppercase tracking-widest text-outline">
+            <tr>
+              <th class="py-2">#</th>
+              <th class="py-2">Merchant / Category</th>
+              <th class="py-2">Amount</th>
+              <th class="py-2">Type</th>
+              <th class="py-2">Risk %</th>
+              <th class="py-2">Label</th>
+            </tr>
+          </thead>
+          <tbody id="top-cases"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+  <script src="/assets/app.js"></script>
+</body>
+</html>

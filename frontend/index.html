@@ -1,0 +1,225 @@
+﻿<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vigilant Lens | AI Fraud Detection</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            background: '#111318',
+            primary: '#adc6ff',
+            'primary-container': '#4b8eff',
+            surface: '#111318',
+            'surface-container': '#1e2024',
+            'surface-container-high': '#282a2e',
+            'surface-container-highest': '#333539',
+            outline: '#8b90a0',
+            'on-surface': '#e2e2e8',
+            'on-surface-variant': '#c1c6d7',
+            secondary: '#53e16f',
+            tertiary: '#ffb4aa',
+            'tertiary-container': '#ff5545',
+          },
+          fontFamily: {
+            headline: ['Manrope'],
+            body: ['Inter'],
+          },
+          borderRadius: {
+            xl: '0.75rem',
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    body { background-color: #111318; color: #e2e2e8; font-family: 'Inter', sans-serif; }
+    .grain-overlay { background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E'); opacity: .04; pointer-events: none; }
+    .glass { background: rgba(51, 53, 57, 0.6); backdrop-filter: blur(14px); border: 1px solid rgba(226, 226, 232, 0.1); }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+  </style>
+</head>
+<body class="selection:bg-primary/30">
+  <div class="fixed inset-0 grain-overlay z-0"></div>
+  <!-- Nav -->
+  <nav class="fixed top-0 w-full z-40 bg-[#111318]/70 backdrop-blur-xl border-b border-white/5">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="text-2xl font-extrabold tracking-tight text-primary">Vigilant Lens</div>
+        <span class="text-xs text-outline uppercase tracking-widest">AI Fraud Intelligence</span>
+      </div>
+      <div class="hidden md:flex items-center gap-6 text-sm font-semibold">
+        <a class="text-on-surface-variant hover:text-on-surface transition" href="#features">Features</a>
+        <a class="text-on-surface-variant hover:text-on-surface transition" href="#pipeline">Pipeline</a>
+        <a class="text-on-surface-variant hover:text-on-surface transition" href="#cta">Docs</a>
+        <a class="text-on-surface-variant hover:text-on-surface transition" href="/results">Last Results</a>
+      </div>
+      <div class="flex items-center gap-3">
+        <a class="text-sm font-semibold text-on-surface-variant hover:text-primary" href="/upload">Upload CSV</a>
+        <a class="px-4 py-2 rounded-lg bg-primary-container text-[#00285c] font-bold shadow-[0_10px_40px_rgba(75,142,255,0.25)] hover:translate-y-[-1px] transition" href="/upload">Launch Console</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="pt-24 relative z-10">
+    <!-- Hero -->
+    <section class="min-h-[80vh] flex items-center justify-center px-6" id="hero">
+      <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-10 items-center">
+        <div class="space-y-6">
+          <p class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container border border-outline/20 text-primary text-xs font-semibold uppercase tracking-widest">
+            <span class="w-2 h-2 bg-primary rounded-full animate-pulse"></span>
+            Real-time fraud radar
+          </p>
+          <h1 class="text-5xl md:text-6xl font-headline font-extrabold leading-[0.95]">Detect fraud before it costs you.</h1>
+          <p class="text-lg text-on-surface-variant leading-relaxed">Dual-model scoring blends behavioral and transaction signals so you catch sophisticated attacks instantly.</p>
+          <div class="flex flex-wrap gap-3">
+            <a href="/upload" class="px-6 py-3 rounded-xl bg-primary-container text-[#00285c] font-bold hover:shadow-[0_0_25px_rgba(75,142,255,0.4)] transition">Upload CSV</a>
+            <a href="/results" class="px-6 py-3 rounded-xl border border-outline/40 text-on-surface font-semibold hover:border-primary/70 transition">View latest results</a>
+          </div>
+          <div class="flex gap-6 text-sm text-on-surface-variant pt-4">
+            <div><span class="text-primary font-bold">0.3 + 0.7</span> model fusion</div>
+            <div><span class="text-primary font-bold">CSV</span> batch ready</div>
+            <div><span class="text-primary font-bold">Risk bands</span> LOW / MEDIUM / HIGH</div>
+          </div>
+        </div>
+        <div class="glass rounded-2xl p-6 shadow-2xl border border-primary/20">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <p class="text-xs text-outline uppercase">Live Monitor</p>
+              <h3 class="text-xl font-bold">Anomalous Geo-velocity</h3>
+            </div>
+            <span class="px-3 py-1 text-xs rounded-full bg-tertiary-container/15 text-tertiary border border-tertiary/20">Action required</span>
+          </div>
+          <div class="space-y-4">
+            <div class="flex justify-between items-center border-b border-white/5 pb-4">
+              <div>
+                <p class="text-sm text-outline">Fraud risk</p>
+                <p class="text-3xl font-extrabold text-tertiary">92%</p>
+              </div>
+              <div class="text-right">
+                <p class="text-sm text-outline">Pattern match</p>
+                <p class="font-semibold">Mule cluster overlap</p>
+              </div>
+            </div>
+            <div class="grid grid-cols-3 gap-3 text-sm">
+              <div class="p-3 rounded-lg bg-surface-container-highest/50 border border-white/5">
+                <p class="text-outline">Signals</p>
+                <p class="text-lg font-bold">15</p>
+              </div>
+              <div class="p-3 rounded-lg bg-surface-container-highest/50 border border-white/5">
+                <p class="text-outline">Lookback</p>
+                <p class="text-lg font-bold">30 days</p>
+              </div>
+              <div class="p-3 rounded-lg bg-surface-container-highest/50 border border-white/5">
+                <p class="text-outline">Latency</p>
+                <p class="text-lg font-bold">&lt; 900ms</p>
+              </div>
+            </div>
+            <div class="flex items-center justify-between text-sm text-outline">
+              <span>PaySim + Kartik ensemble</span>
+              <span class="text-primary font-semibold">Production ready</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="py-24 px-6" id="features">
+      <div class="max-w-6xl mx-auto">
+        <div class="flex items-end justify-between mb-10">
+          <div>
+            <p class="text-xs uppercase tracking-[0.3em] text-outline">Why it wins</p>
+            <h2 class="text-3xl font-extrabold mt-2">Designed for banking-grade detection</h2>
+          </div>
+          <a href="/upload" class="text-primary font-semibold hover:underline">Start a run ?</a>
+        </div>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="glass p-6 rounded-2xl space-y-3">
+            <span class="material-symbols-outlined text-primary">bolt</span>
+            <h3 class="text-xl font-bold">Instant scoring</h3>
+            <p class="text-sm text-on-surface-variant">CSV upload to risk labels in one request. Results cached and downloadable.</p>
+          </div>
+          <div class="glass p-6 rounded-2xl space-y-3">
+            <span class="material-symbols-outlined text-secondary">psychology</span>
+            <h3 class="text-xl font-bold">Behavior + transaction</h3>
+            <p class="text-sm text-on-surface-variant">Ensemble blends PaySim transaction flow with Kartik behavioral vectors.</p>
+          </div>
+          <div class="glass p-6 rounded-2xl space-y-3">
+            <span class="material-symbols-outlined text-tertiary">shield</span>
+            <h3 class="text-xl font-bold">Explainable outputs</h3>
+            <p class="text-sm text-on-surface-variant">Flags, risk bands, and downloadable CSV ready for analysts and SIEMs.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pipeline -->
+    <section class="py-24 px-6 bg-surface-container" id="pipeline">
+      <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-10 items-center">
+        <div class="space-y-4">
+          <p class="text-xs uppercase tracking-[0.3em] text-outline">How it works</p>
+          <h2 class="text-3xl font-extrabold">Upload ? Score ? Review</h2>
+          <div class="space-y-3 text-on-surface-variant">
+            <p>1) Upload a CSV with PaySim-style or card transaction fields.</p>
+            <p>2) Backend runs dual models, fusing 30% PaySim + 70% Kartik probability.</p>
+            <p>3) Download the labeled CSV or explore the highlights in the Results page.</p>
+          </div>
+          <div class="flex gap-3">
+            <a href="/upload" class="px-5 py-3 rounded-lg bg-primary-container text-[#00285c] font-bold">Try a dataset</a>
+            <a href="/results" class="px-5 py-3 rounded-lg border border-outline/30 text-on-surface font-semibold">See sample run</a>
+          </div>
+        </div>
+        <div class="glass rounded-2xl p-6 border border-primary/15 shadow-2xl">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <p class="text-xs text-outline uppercase">Risk distribution</p>
+              <h3 class="text-xl font-bold">Last 50K rows</h3>
+            </div>
+            <span class="text-xs text-outline">Auto-updates</span>
+          </div>
+          <div class="grid grid-cols-3 gap-4 text-center">
+            <div class="p-4 rounded-lg bg-surface-container-high"><p class="text-outline text-sm">Low</p><p class="text-3xl font-extrabold text-emerald-300">72%</p></div>
+            <div class="p-4 rounded-lg bg-surface-container-high"><p class="text-outline text-sm">Medium</p><p class="text-3xl font-extrabold text-amber-200">21%</p></div>
+            <div class="p-4 rounded-lg bg-surface-container-high"><p class="text-outline text-sm">High</p><p class="text-3xl font-extrabold text-rose-400">7%</p></div>
+          </div>
+          <div class="mt-6 text-sm text-on-surface-variant">
+            Download full CSV with `risk_label`, `fraud_flag`, `risk_percent` columns.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-20 px-6" id="cta">
+      <div class="max-w-6xl mx-auto glass rounded-2xl p-10 flex flex-col lg:flex-row items-center justify-between gap-6">
+        <div>
+          <p class="text-xs uppercase tracking-[0.3em] text-outline">Ready to test?</p>
+          <h3 class="text-3xl font-extrabold mt-2">Run your CSV through Vigilant Lens</h3>
+          <p class="text-on-surface-variant mt-2">No code needed. Upload, score, and download results instantly.</p>
+        </div>
+        <div class="flex gap-3">
+          <a href="/upload" class="px-6 py-3 rounded-xl bg-primary-container text-[#00285c] font-bold">Upload now</a>
+          <a href="/results" class="px-6 py-3 rounded-xl border border-outline/30 text-on-surface font-semibold">View results</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+</body>
+</html>
+
+
+

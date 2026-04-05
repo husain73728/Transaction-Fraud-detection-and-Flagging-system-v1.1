@@ -1,0 +1,97 @@
+{
+  "job_id": "3b00acf3312e",
+  "file_name": "3b00acf3312e_customers-10000.csv",
+  "processed_at": "2026-04-04T18:37:59.293291Z",
+  "rows": 10000,
+  "high_risk": 0,
+  "medium_risk": 0,
+  "low_risk": 10000,
+  "unknown": 0,
+  "flagged": 0,
+  "avg_risk_percent": 4.0,
+  "max_risk_percent": 4.0,
+  "download_path": "E:\\2\\backend\\tmp\\predictions\\3b00acf3312e.csv",
+  "top_cases": [
+    {
+      "Index": 1,
+      "Customer Id": "EB54EF1154C3A78",
+      "First Name": "Heather",
+      "Last Name": "Callahan",
+      "Company": "Mosley-David",
+      "risk_percent": 4.0,
+      "fraud_flag": 0,
+      "risk_label": "LOW RISK"
+    },
+    {
+      "Index": 2,
+      "Customer Id": "10dAcafEBbA5FcA",
+      "First Name": "Kristina",
+      "Last Name": "Ferrell",
+      "Company": "Horn, Shepard and Watson",
+      "risk_percent": 4.0,
+      "fraud_flag": 0,
+      "risk_label": "LOW RISK"
+    },
+    {
+      "Index": 3,
+      "Customer Id": "67DAB15Ebe4BE4a",
+      "First Name": "Briana",
+      "Last Name": "Andersen",
+      "Company": "Irwin-Oneal",
+      "risk_percent": 4.0,
+      "fraud_flag": 0,
+      "risk_label": "LOW RISK"
+    },
+    {
+      "Index": 4,
+      "Customer Id": "6d350C5E5eDB4EE",
+      "First Name": "Patty",
+      "Last Name": "Ponce",
+      "Company": "Richardson Group",
+      "risk_percent": 4.0,
+      "fraud_flag": 0,
+      "risk_label": "LOW RISK"
+    },
+    {
+      "Index": 5,
+      "Customer Id": "5820deAdCF23EFe",
+      "First Name": "Kathleen",
+      "Last Name": "Mccormick",
+      "Company": "Carson-Burch",
+      "risk_percent": 4.0,
+      "fraud_flag": 0,
+      "risk_label": "LOW RISK"
+    },
+    {
+      "Index": 6,
+      "Customer Id": "E1CDEaC63fDd5aA",
+      "First Name": "Trevor",
+      "Last Name": "Lee",
+      "Company": "Maddox Group",
+      "risk_percent": 4.0,
+      "fraud_flag": 0,
+      "risk_label": "LOW RISK"
+    },
+    {
+      "Index": 7,
+      "Customer Id": "3e1187fCcebC8d2",
+      "First Name": "Mathew",
+      "Last Name": "Hoffman",
+      "Company": "Bender, Pittman and Kidd",
+      "risk_percent": 4.0,
+      "fraud_flag": 0,
+      "risk_label": "LOW RISK"
+    },
+    {
+      "Index": 8,
+      "Customer Id": "47C5cEE243c9A7b",
+      "First Name": "Glenn",
+      "Last Name": "Wiggins",
+      "Company": "Glenn-Harvey",
+      "risk_percent": 4.0,
+      "fraud_flag": 0,
+      "risk_label": "LOW RISK"
+    }
+  ],
+  "download_url": "/api/jobs/3b00acf3312e/download"
+}

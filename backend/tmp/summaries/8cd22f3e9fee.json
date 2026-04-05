@@ -1,0 +1,67 @@
+{
+  "job_id": "8cd22f3e9fee",
+  "file_name": "8cd22f3e9fee_input_transactions.csv",
+  "processed_at": "2026-04-05T07:52:57.436987Z",
+  "rows": 5,
+  "high_risk": 0,
+  "medium_risk": 0,
+  "low_risk": 5,
+  "unknown": 0,
+  "flagged": 0,
+  "avg_risk_percent": 4.4,
+  "max_risk_percent": 5.8,
+  "download_path": "E:\\2\\backend\\tmp\\predictions\\8cd22f3e9fee.csv",
+  "top_cases": [
+    {
+      "amount": 7000,
+      "type": "CASH_OUT",
+      "step": 5,
+      "oldbalanceorg": 8000,
+      "newbalanceorig": 1000,
+      "risk_percent": 5.797077481127588,
+      "fraud_flag": 0,
+      "risk_label": "LOW RISK"
+    },
+    {
+      "amount": 25000,
+      "type": "TRANSFER",
+      "step": 4,
+      "oldbalanceorg": 30000,
+      "newbalanceorig": 5000,
+      "risk_percent": 5.780462695760326,
+      "fraud_flag": 0,
+      "risk_label": "LOW RISK"
+    },
+    {
+      "amount": 12000,
+      "type": "CASH_OUT",
+      "step": 2,
+      "oldbalanceorg": 15000,
+      "newbalanceorig": 3000,
+      "risk_percent": 3.799949624879056,
+      "fraud_flag": 0,
+      "risk_label": "LOW RISK"
+    },
+    {
+      "amount": 200,
+      "type": "PAYMENT",
+      "step": 3,
+      "oldbalanceorg": 5000,
+      "newbalanceorig": 4800,
+      "risk_percent": 3.7996978253847513,
+      "fraud_flag": 0,
+      "risk_label": "LOW RISK"
+    },
+    {
+      "amount": 5000,
+      "type": "TRANSFER",
+      "step": 1,
+      "oldbalanceorg": 10000,
+      "newbalanceorig": 5000,
+      "risk_percent": 2.8,
+      "fraud_flag": 0,
+      "risk_label": "LOW RISK"
+    }
+  ],
+  "download_url": "/api/jobs/8cd22f3e9fee/download"
+}

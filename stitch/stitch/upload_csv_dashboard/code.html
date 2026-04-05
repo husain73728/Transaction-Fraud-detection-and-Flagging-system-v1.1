@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "on-secondary": "#003911",
+                "on-secondary-container": "#003a11",
+                "tertiary-fixed-dim": "#ffb4aa",
+                "surface-container-low": "#1a1c20",
+                "primary-fixed": "#d8e2ff",
+                "on-primary": "#002e69",
+                "surface-variant": "#333539",
+                "on-surface": "#e2e2e8",
+                "surface-container-highest": "#333539",
+                "surface-tint": "#adc6ff",
+                "outline-variant": "#414755",
+                "inverse-surface": "#e2e2e8",
+                "surface-bright": "#37393e",
+                "primary": "#adc6ff",
+                "inverse-on-surface": "#2f3035",
+                "secondary-container": "#05b046",
+                "outline": "#8b90a0",
+                "secondary-fixed-dim": "#53e16f",
+                "primary-fixed-dim": "#adc6ff",
+                "surface": "#111318",
+                "on-primary-fixed-variant": "#004493",
+                "inverse-primary": "#005bc1",
+                "tertiary-container": "#ff5545",
+                "surface-container": "#1e2024",
+                "tertiary-fixed": "#ffdad5",
+                "on-tertiary-container": "#5c0002",
+                "on-tertiary-fixed-variant": "#930005",
+                "secondary": "#53e16f",
+                "primary-container": "#4b8eff",
+                "on-tertiary": "#690003",
+                "on-primary-container": "#00285c",
+                "error-container": "#93000a",
+                "tertiary": "#ffb4aa",
+                "error": "#ffb4ab",
+                "on-error-container": "#ffdad6",
+                "surface-container-lowest": "#0c0e12",
+                "background": "#111318",
+                "surface-container-high": "#282a2e",
+                "on-secondary-fixed-variant": "#00531c",
+                "secondary-fixed": "#72fe88",
+                "on-tertiary-fixed": "#410001",
+                "on-primary-fixed": "#001a41",
+                "on-background": "#e2e2e8",
+                "on-secondary-fixed": "#002107",
+                "surface-dim": "#111318",
+                "on-surface-variant": "#c1c6d7",
+                "on-error": "#690005"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+            },
+            "fontFamily": {
+                "headline": ["Manrope"],
+                "body": ["Inter"],
+                "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-headline { font-family: 'Manrope', sans-serif; }
+        .glass-panel {
+            background: rgba(51, 53, 57, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 226, 232, 0.1);
+        }
+        .grain-overlay {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface selection:bg-primary/30 min-h-screen">
+<div class="fixed inset-0 grain-overlay z-[60]"></div>
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-[#111318] dark:bg-slate-950 flex flex-col h-full py-6 px-4 z-50">
+<div class="mb-10 px-2">
+<h1 class="text-xl font-bold tracking-tighter text-[#ADC6FF] dark:text-blue-300">Vigilant Lens</h1>
+<p class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold mt-1">AI Fraud Intelligence</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-500 hover:text-slate-300 transition-colors hover:bg-[#1E2024] group" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-500 hover:text-slate-300 transition-colors hover:bg-[#1E2024] group" href="#">
+<span class="material-symbols-outlined" data-icon="security">security</span>
+<span class="font-medium">Investigations</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-500 hover:text-slate-300 transition-colors hover:bg-[#1E2024] group" href="#">
+<span class="material-symbols-outlined" data-icon="biotech">biotech</span>
+<span class="font-medium">Fraud Radar</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#ADC6FF] bg-[#1E2024] font-semibold border-r-2 border-[#4B8EFF]" href="#">
+<span class="material-symbols-outlined" data-icon="upload_file" style="font-variation-settings: 'FILL' 1;">upload_file</span>
+<span class="font-medium">Data Sources</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-500 hover:text-slate-300 transition-colors hover:bg-[#1E2024] group" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-medium">Settings</span>
+</a>
+</nav>
+<div class="mt-auto space-y-1 pt-6 border-t border-white/5">
+<button class="w-full bg-primary-container text-on-primary py-2.5 rounded-lg font-bold text-sm mb-6 flex items-center justify-center gap-2 hover:opacity-90 transition-all active:scale-95">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+                New Analysis
+            </button>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-500 hover:text-slate-300 transition-colors hover:bg-[#1E2024]" href="#">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+<span class="font-medium">Help Center</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-500 hover:text-slate-300 transition-colors hover:bg-[#1E2024]" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-medium">Log Out</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 min-h-screen relative">
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 w-[calc(100%-16rem)] h-16 z-40 bg-[#111318]/80 backdrop-blur-xl dark:bg-slate-950/80 border-b border-white/5 flex items-center justify-between px-8">
+<div class="flex items-center bg-surface-container-low px-4 py-1.5 rounded-full w-96">
+<span class="material-symbols-outlined text-outline text-xl" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm text-on-surface placeholder:text-outline w-full ml-2" placeholder="Search investigations..." type="text"/>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4 text-slate-400">
+<button class="hover:text-white transition-colors opacity-80 active:opacity-100">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="hover:text-white transition-colors opacity-80 active:opacity-100">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+</button>
+<button class="hover:text-white transition-colors opacity-80 active:opacity-100">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+</button>
+</div>
+<div class="h-8 w-px bg-white/10"></div>
+<div class="flex items-center gap-3">
+<div class="text-right">
+<p class="text-xs font-bold text-on-surface">Alex Rivera</p>
+<p class="text-[10px] text-primary">Senior Analyst</p>
+</div>
+<img alt="Security Analyst Profile" class="w-8 h-8 rounded-full bg-primary-container/20 border border-primary/20" data-alt="professional headshot of a security analyst in a dark modern office setting with blue ambient lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVFIUWHLpMrXj6Elixc_fRCfuJq6o1gzdneVF47DUDbXn6Ptdm7e-7pxeUTpL56ZdpNXBg8xthNHTDr18SP7RhmF0iqoil6zxKK5uLl6EztbcTUpvM7KIqyxGhq6qBEA9olRC004Cmz5_L4rgNyaz_eI_5bu2IotRwvZxjy_1ix53dbgVpfXSznqbIn5wop8iT1VU10rnaleb7STugVVSupx6ja99xIF7-FcFC4hgC3VvfPReAUBdumPpHidh4Hc-hysr6S2NFfwtK"/>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<div class="pt-24 px-12 pb-12 max-w-7xl mx-auto">
+<div class="mb-10">
+<h2 class="text-4xl font-extrabold tracking-tight font-headline text-on-surface mb-2">Upload Data</h2>
+<p class="text-on-surface-variant max-w-2xl leading-relaxed">
+                    Import transaction logs for real-time neural analysis. Our engine cross-references millions of data points to identify anomalies instantly.
+                </p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Upload Zone -->
+<div class="lg:col-span-2 space-y-8">
+<div class="glass-panel rounded-xl p-12 border-2 border-dashed border-primary/30 flex flex-col items-center justify-center group hover:border-primary/60 transition-all duration-300 relative overflow-hidden">
+<div class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-6 ring-8 ring-primary/5">
+<span class="material-symbols-outlined text-4xl text-primary" data-icon="cloud_upload">cloud_upload</span>
+</div>
+<h3 class="text-xl font-bold mb-2">Drag &amp; Drop CSV</h3>
+<p class="text-on-surface-variant mb-8 text-center max-w-xs">Upload your transaction datasets here to begin the fraud detection cycle.</p>
+<button class="bg-primary-container text-on-primary px-8 py-3 rounded-lg font-bold hover:shadow-[0_0_20px_rgba(75,142,255,0.4)] transition-all active:scale-95">
+                            Browse Files
+                        </button>
+<p class="mt-6 text-[11px] text-outline uppercase tracking-widest font-semibold">Maximum file size: 500MB</p>
+</div>
+<!-- Recent Uploads -->
+<div class="glass-panel rounded-xl overflow-hidden">
+<div class="px-6 py-4 border-b border-white/5 flex items-center justify-between">
+<h4 class="font-bold text-lg">Recent Uploads</h4>
+<button class="text-primary text-sm font-semibold hover:underline">View All History</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-surface-container-high/50 text-[11px] uppercase tracking-widest text-outline">
+<tr>
+<th class="px-6 py-4 font-semibold">File Name</th>
+<th class="px-6 py-4 font-semibold">Upload Date</th>
+<th class="px-6 py-4 font-semibold">Records</th>
+<th class="px-6 py-4 font-semibold">Status</th>
+<th class="px-6 py-4 font-semibold text-right">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-white/5">
+<tr class="hover:bg-white/5 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary/60" data-icon="description">description</span>
+<span class="font-medium text-sm">q3_global_trans.csv</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant">Oct 24, 2023 • 14:20</td>
+<td class="px-6 py-4 text-sm font-mono">1.2M</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-secondary-container text-on-secondary">
+                                                ANALYZED
+                                            </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary/60" data-icon="description">description</span>
+<span class="font-medium text-sm">test_batch_09.csv</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant">Oct 24, 2023 • 09:15</td>
+<td class="px-6 py-4 text-sm font-mono">450k</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-primary/20 text-primary animate-pulse">
+                                                PROCESSING
+                                            </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary/60" data-icon="description">description</span>
+<span class="font-medium text-sm">failed_import_recovery.csv</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant">Oct 23, 2023 • 18:45</td>
+<td class="px-6 py-4 text-sm font-mono">22k</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-tertiary-container text-on-tertiary-container">
+                                                FAILED
+                                            </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Sidebar Content -->
+<div class="space-y-8">
+<!-- Requirements Card -->
+<div class="glass-panel rounded-xl p-6 bg-gradient-to-br from-surface-container-high to-surface-container-low">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary" data-icon="rule">rule</span>
+<h4 class="font-bold">File Requirements</h4>
+</div>
+<ul class="space-y-4">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary text-sm mt-0.5" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<div>
+<p class="text-sm font-semibold">Required Columns</p>
+<p class="text-xs text-on-surface-variant mt-1 leading-relaxed">Must contain <code class="bg-black/30 px-1 rounded text-primary">transaction_id</code>, <code class="bg-black/30 px-1 rounded text-primary">amount</code>, and <code class="bg-black/30 px-1 rounded text-primary">timestamp</code>.</p>
+</div>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary text-sm mt-0.5" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<div>
+<p class="text-sm font-semibold">Format Specifications</p>
+<p class="text-xs text-on-surface-variant mt-1">UTF-8 encoded CSV files only. Max 1,000,000 rows per batch.</p>
+</div>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary text-sm mt-0.5" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<div>
+<p class="text-sm font-semibold">Data Integrity</p>
+<p class="text-xs text-on-surface-variant mt-1">Numerical values must not contain currency symbols ($ or €).</p>
+</div>
+</li>
+</ul>
+<div class="mt-8 pt-6 border-t border-white/5">
+<button class="w-full py-2 text-sm font-bold text-primary border border-primary/20 rounded-lg hover:bg-primary/10 transition-colors">
+                                Download Template
+                            </button>
+</div>
+</div>
+<!-- AI Insights Preview Card -->
+<div class="glass-panel rounded-xl p-6 relative overflow-hidden">
+<div class="absolute -right-10 -bottom-10 w-32 h-32 bg-primary/10 blur-3xl"></div>
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-primary" data-icon="auto_awesome">auto_awesome</span>
+<h4 class="font-bold">Intelligence Preview</h4>
+</div>
+<p class="text-xs text-on-surface-variant mb-6 leading-relaxed">
+                            Once uploaded, our neural net will scan for high-risk patterns including:
+                        </p>
+<div class="space-y-3">
+<div class="flex items-center justify-between text-[11px] font-semibold text-outline tracking-wider">
+<span>VELOCITY SPIKES</span>
+<span class="text-secondary">ACTIVE</span>
+</div>
+<div class="w-full bg-white/5 h-1 rounded-full overflow-hidden">
+<div class="bg-secondary h-full w-[85%]"></div>
+</div>
+<div class="flex items-center justify-between text-[11px] font-semibold text-outline tracking-wider pt-2">
+<span>GEO-ANOMALIES</span>
+<span class="text-secondary">ACTIVE</span>
+</div>
+<div class="w-full bg-white/5 h-1 rounded-full overflow-hidden">
+<div class="bg-secondary h-full w-[92%]"></div>
+</div>
+</div>
+</div>
+<!-- Image Section for aesthetic depth -->
+<div class="rounded-xl overflow-hidden aspect-[4/3] relative group shadow-2xl">
+<img alt="Fraud Detection Data Visualization" class="w-full h-full object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-80 transition-all duration-700" data-alt="abstract digital visualization of complex data networks and glowing blue nodes representing financial transactions in a dark cybernetic environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHGmv1LQ0mHKzoSC1Lm4eO50juEGaKrnpOpd58bPVeD2In78YFcfAROFdRXJfzVXoCqPm4kDvhPth4eWF_8CRygdeLwPT5gMuJd9PVTvVz9St0YMebiptW6vzHl8EhXP2sJ7t5SKuEglCVVBAvAIqcPWFH0Nj8suShvGaIZ1oUxrJ-Gez9IzXaFPuzn71oK42OZk4RUCQu71s3prj22ChN0iCOizbV0D381TVChSpO5TVVApf-X-Tt1VLM21EE5sJBkTYvRTtyaF-c"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+<div class="absolute bottom-4 left-4">
+<p class="text-[10px] font-bold text-primary uppercase tracking-[0.2em] mb-1">Live Engine Status</p>
+<p class="text-xs font-medium">99.9% Detection Accuracy</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>
